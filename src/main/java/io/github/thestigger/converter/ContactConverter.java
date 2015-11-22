@@ -1,6 +1,6 @@
 package io.github.thestigger.converter;
 
-import io.github.thestigger.model.Contact;
+import io.github.thestigger.entity.Contact;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -11,6 +11,7 @@ public class ContactConverter {
 
     /**
      * Convert Contact Object to MongoDB Document.
+     *
      * @param c Contact Object
      * @return MongoDB Document
      */
@@ -32,6 +33,7 @@ public class ContactConverter {
 
     /**
      * Convert MongoDB Document to Contact Object.
+     *
      * @param doc MongoDB Document
      * @return Contact Object
      */

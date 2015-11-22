@@ -6,6 +6,7 @@
 
     <display-name>Work Diary</display-name>
 
+    <!--MongoDB Contect-->
     <context-param>
         <param-name>MONGODB_HOST</param-name>
         <param-value>localhost</param-value>
@@ -15,8 +16,22 @@
         <param-value>27017</param-value>
     </context-param>
 
+    <!--JSF Context-->
+    <context-param>
+        <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+        <param-value>0</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
     <!--JSF Mapping-->
@@ -44,5 +59,8 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
-
+    <!--Listener-->
+    <listener>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+    </listener>
 </web-app>

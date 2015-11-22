@@ -1,11 +1,23 @@
-package io.github.thestigger.model;
+package io.github.thestigger.entity;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.Size;
 
 /**
  * Created by maxim on 10/14/15.
  */
+@Document(collection="contacts")
 public class Contact {
+
+    @Id
     private String id;
+
+    @Size(min = 1, message = "Name cannot be empty!")
     private String name;
+
+    @Size(min = 1, message = "Surname cannot be empty!")
     private String surname;
     private String jobPosition;
     private String phoneNumber;

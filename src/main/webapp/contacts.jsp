@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="io.github.thestigger.model.Contact" %>
+<%@ page import="io.github.thestigger.entity.Contact" %>
 <%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
