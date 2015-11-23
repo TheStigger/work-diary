@@ -8,10 +8,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 /**
- * Created by maxim on 11/23/15.
+ * PrimeFaces Menu Controller.
  */
 @ManagedBean
-//@ViewScoped
 public class MenuController {
 
     private MenuModel model;
@@ -24,6 +23,11 @@ public class MenuController {
         DefaultMenuItem item = new DefaultMenuItem("Home");
         item.setUrl("/");
         item.setIcon("ui-icon-home");
+        model.addElement(item);
+
+        item = new DefaultMenuItem("Events");
+        item.setUrl("/events.xhtml");
+        item.setIcon("ui-icon-calendar");
         model.addElement(item);
 
         item = new DefaultMenuItem("Contacts");
