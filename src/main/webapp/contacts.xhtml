@@ -31,14 +31,18 @@
             <p:column headerText="email">
                 <p:outputLabel value="#{contact.email}"/>
             </p:column>
-            <p:column headerText="operations">
+            <p:column style="width:42px; text-align: center">
                 <h:form>
-                    <p:commandButton value="edit"
+                    <p:commandButton icon="ui-icon-pencil"
                                      action="#{contactListController.setContact(contact)}"
                                      update="contactForm"
                                      resetValues="true"
                                      oncomplete="PF('contactDialog').show()"/>
-                    <p:commandButton value="remove"
+                </h:form>
+            </p:column>
+            <p:column style="width:42px; text-align: center">
+                <h:form>
+                    <p:commandButton icon="ui-icon-trash"
                                      action="#{contactListController.remove(contact)}"
                                      update="contactTable, :messages">
                         <p:confirm header="Confirmation" message="Are you sure?"

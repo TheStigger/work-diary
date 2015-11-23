@@ -33,14 +33,18 @@
                                 readonly="true"/>
                 </h:form>
             </p:column>
-            <p:column headerText="operations">
+            <p:column style="width:42px; text-align: center">
                 <h:form>
-                    <p:commandButton value="edit"
+                    <p:commandButton icon="ui-icon-pencil"
                                      action="#{eventListController.setEvent(event)}"
                                      update="eventForm"
                                      resetValues="true"
                                      oncomplete="PF('eventDialog').show()"/>
-                    <p:commandButton value="remove"
+                </h:form>
+            </p:column>
+            <p:column style="width:42px; text-align: center">
+                <h:form>
+                    <p:commandButton icon="ui-icon-trash"
                                      action="#{eventListController.remove(event)}"
                                      update="eventTable, :messages">
                         <p:confirm header="Confirmation" message="Are you sure?"
