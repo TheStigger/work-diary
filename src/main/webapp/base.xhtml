@@ -5,7 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title><ui:insert name="title">Title block</ui:insert></title>
@@ -22,6 +23,7 @@
     <div id="sidebar">
         <ui:insert name="sidebar">
             <h1>Sidebar block</h1>
+            <p:menu model="#{menuController.model}"/>
         </ui:insert>
     </div>
 
