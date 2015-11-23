@@ -4,8 +4,6 @@ import io.github.thestigger.entity.Contact;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.inject.Named;
-
 /**
  * Created by maxim on 11/22/15.
  */

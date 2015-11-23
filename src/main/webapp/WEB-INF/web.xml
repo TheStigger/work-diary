@@ -6,16 +6,6 @@
 
     <display-name>Work Diary</display-name>
 
-    <!--MongoDB Contect-->
-    <context-param>
-        <param-name>MONGODB_HOST</param-name>
-        <param-value>localhost</param-value>
-    </context-param>
-    <context-param>
-        <param-name>MONGODB_PORT</param-name>
-        <param-value>27017</param-value>
-    </context-param>
-
     <!--JSF Context-->
     <context-param>
         <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
@@ -58,9 +48,4 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-
-    <!--Listener-->
-    <listener>
-        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-    </listener>
 </web-app>

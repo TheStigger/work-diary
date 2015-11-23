@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 /**
  * Created by maxim on 10/14/15.
  */
-@Document(collection="contacts")
+@Document(collection = "Contacts")
 public class Contact {
 
     @Id

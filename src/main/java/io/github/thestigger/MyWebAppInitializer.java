@@ -8,16 +8,16 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 /**
- * Created by maxim on 11/22/15.
+ * Created by maxim on 11/19/15.
  */
-public class WorkWebAppInitializer implements WebApplicationInitializer {
+public class MyWebAppInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         // create the root Spring application context
-        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(SpringConfiguration.class);
+        AnnotationConfigWebApplicationContext mongoContext = new AnnotationConfigWebApplicationContext();
+        mongoContext.register(SpringMongoConfiguration.class);
 
-        // manage the lifecycle of the root application context
-        servletContext.addListener(new ContextLoaderListener(rootContext));
+        // Manager the lifecycle of the root application context
+        servletContext.addListener(new ContextLoaderListener(mongoContext));
     }
 }

@@ -18,7 +18,7 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/java/io/github/thestigger/SpringConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/io/github/thestigger/SpringMongoConfiguration.java</file>
         </fileset>
       </configuration>
     </facet>
@@ -51,12 +51,15 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-mongodb:1.8.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.2.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.2.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:jcl-over-slf4j:1.7.13" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:1.11.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:5.2.1.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.2.1.Final" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.6.4" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
   </component>
 </module>
