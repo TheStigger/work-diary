@@ -2,7 +2,6 @@ h1 {
     text-align: center;
 }
 
-/*#sidebar {*/
-/*float: left;*/
-/*width: 300px;*/
-/*}*/
+.noBorders {
+    border: none !important;
+}
