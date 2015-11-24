@@ -14,30 +14,40 @@
 </h:head>
 
 <h:body>
-    <div id="header">
-        <ui:insert name="header">
-            <h1>Header block</h1>
-        </ui:insert>
-    </div>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="110">
+            <div id="header">
+                <ui:insert name="header">
+                    <h1>Header block</h1>
+                </ui:insert>
+            </div>
+        </p:layoutUnit>
 
-    <div id="sidebar">
-        <ui:insert name="sidebar">
-            <h1>Sidebar block</h1>
-            <p:menu model="#{menuController.model}"/>
-        </ui:insert>
-    </div>
+        <p:layoutUnit position="west" resizable="false" size="235">
+            <div id="sidebar">
+                <ui:insert name="sidebar">
+                    <h1>Sidebar</h1>
+                    <p:menu model="#{menuController.model}"/>
+                </ui:insert>
+            </div>
+        </p:layoutUnit>
 
-    <div id="content">
-        <ui:insert name="content">
-            <h1>Content block</h1>
-        </ui:insert>
-    </div>
+        <p:layoutUnit position="center">
+            <div id="content">
+                <ui:insert name="content">
+                    <h1>Content block</h1>
+                </ui:insert>
+            </div>
+        </p:layoutUnit>
 
-    <div id="footer">
-        <ui:insert name="footer">
-            <h1>Footer block</h1>
-        </ui:insert>
-    </div>
+        <!--<p:layoutUnit position="south" size="100">-->
+        <!--<div id="footer">-->
+        <!--<ui:insert name="footer">-->
+        <!--<h6>Footer block</h6>-->
+        <!--</ui:insert>-->
+        <!--</div>-->
+        <!--</p:layoutUnit>-->
+    </p:layout>
 </h:body>
 
 </html>
