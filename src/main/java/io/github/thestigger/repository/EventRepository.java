@@ -13,5 +13,6 @@ import java.util.List;
 @Repository
 public interface EventRepository extends MongoRepository<Event, String> {
 
-    List<Event> findByDatetimeBetween(Date startDate, Date endDate);
+    // TODO: rewrite to use correct query
+    List<Event> findByStartDateBetween(Date startDate, Date endDate);
 }

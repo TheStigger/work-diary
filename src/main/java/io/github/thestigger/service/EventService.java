@@ -33,7 +33,7 @@ public class EventService {
         repository.findOne(id);
     }
 
-    public List<Event> findByDatetimeBetween(Date startDate, Date endDate) {
-        return repository.findByDatetimeBetween(startDate, endDate);
+    public List<Event> findByStartDateBetween(Date startDate, Date endDate) {
+        return repository.findByStartDateBetween(startDate, endDate);
     }
 }

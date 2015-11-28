@@ -25,13 +25,25 @@
                 <p:outputLabel
                         value="#{event.title}"/>
             </p:column>
-            <p:column headerText="date">
+            <p:column headerText="start date">
                 <h:form>
-                    <p:calendar id="button" value="#{event.datetime}"
-                                showOn="button" pattern="dd/MM/yyyy"
+                    <p:calendar id="button" value="#{event.startDate}"
+                                showOn="button" pattern="dd.MM.yyyy  HH:mm"
                                 onfocus="$('#ui-datepicker-div').find('td').unbind();"
                                 readonly="true"/>
                 </h:form>
+            </p:column>
+            <p:column headerText="end date">
+                <h:form>
+                    <p:calendar value="#{event.endDate}"
+                                showOn="button" pattern="dd.MM.yyyy  HH:mm"
+                                onfocus="$('#ui-datepicker-div').find('td').unbind();"
+                                readonly="true"/>
+                </h:form>
+            </p:column>
+            <p:column headerText="description">
+                <p:outputLabel
+                        value="#{event.description}"/>
             </p:column>
             <p:column style="width:42px; text-align: center">
                 <h:form>
@@ -68,21 +80,36 @@
             <h:form id="eventForm">
                 <p:messages/>
                 <p:focus/>
-                <p:panelGrid columns="1">
-                    title:
-                    <p:inputText value="#{eventListController.event.title}"/>
-                    datetime:
-                    <p:calendar id="datetime"
-                                value="#{eventListController.event.datetime}"
-                                pattern="MM/dd/yyyy HH:mm:ss"/>
-                    description:
-                    <p:inputText
-                            value="#{eventListController.event.description}"/>
+                <p:panelGrid columns="2">
+                    <p:outputLabel for="title" value="Titles:"/>
+                    <p:inputText id="title"
+                                 value="#{eventListController.event.title}"
+                                 required="true"/>
+
+                    <p:outputLabel for="from" value="From:"/>
+                    <p:calendar id="from"
+                                value="#{eventListController.event.startDate}"
+                                timeZone="GMT+2" pattern="dd.MM.yyyy HH:mm"/>
+
+                    <p:outputLabel for="to" value="To:"/>
+                    <p:calendar id="to"
+                                value="#{eventListController.event.endDate}"
+                                timeZone="GMT+2" pattern="dd.MM.yyyy HH:mm"/>
+
+                    <p:outputLabel for="description" value="Description:"/>
+                    <p:inputText id="description"
+                                 value="#{eventListController.event.description}"/>
+
+                    <p:outputLabel for="allDay" value="All Day:"/>
+                    <h:selectBooleanCheckbox id="allDay"
+                                             value="#{eventListController.event.allDay}"/>
+
+                    <p:commandButton type="reset" value="Reset"/>
+                    <p:commandButton value="save"
+                                     action="#{eventListController.save}"
+                                     update="eventForm, :eventTable, :messages"
+                                     oncomplete="handleDialogSubmit(args, 'eventDialog')"/>
                 </p:panelGrid>
-                <p:commandButton value="save"
-                                 action="#{eventListController.save}"
-                                 update="eventForm, :eventTable, :messages"
-                                 oncomplete="handleDialogSubmit(args, 'eventDialog')"/>
             </h:form>
         </p:dialog>
 

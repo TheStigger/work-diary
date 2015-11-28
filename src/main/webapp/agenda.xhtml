@@ -26,10 +26,16 @@
                     <p:ajax event="toggle"/>
                     <ui:repeat value="#{agendaController.eventsMap.get(date)}"
                                var="event">
-                        <h:panelGrid columns="3" cellpadding="10">
-                            <h:outputText value="#{event.datetime}">
+                        <h:panelGrid columns="6" cellpadding="10">
+                            <!--TODO: checkk 'all day' case-->
+                            <h:outputText value="#{event.startDate}">
                                 <f:convertDateTime pattern="dd.MM.yyyy"/>
                             </h:outputText>
+                            <h:outputText value="-"/>
+                            <h:outputText value="#{event.endDate}">
+                                <f:convertDateTime pattern="dd.MM.yyyy"/>
+                            </h:outputText>
+                            <h:outputText value="|"/>
                             <h:outputText value="#{event.title}"/>
                             <h:outputText value="#{event.description}"/>
                         </h:panelGrid>

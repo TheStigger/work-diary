@@ -32,12 +32,12 @@ public class AgendaController implements Serializable {
         Calendar startDate = Calendar.getInstance();
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.DATE, 7);
-        events = service.findByDatetimeBetween(startDate.getTime(), endDate.getTime());
+        events = service.findByStartDateBetween(startDate.getTime(), endDate.getTime());
 
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         for (Event event : events) {
             String truncatedDate = null;
-            truncatedDate = dateFormat.format(event.getDatetime());
+            truncatedDate = dateFormat.format(event.getStartDate());
             if (eventsMap == null) {
                 eventsMap = new TreeMap<>();
             }
