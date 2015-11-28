@@ -39,7 +39,7 @@ public class AgendaController implements Serializable {
             String truncatedDate = null;
             truncatedDate = dateFormat.format(event.getStartDate());
             if (eventsMap == null) {
-                eventsMap = new TreeMap<>();
+                eventsMap = new LinkedHashMap<>();
             }
             if (!eventsMap.containsKey(truncatedDate)) {
                 eventsMap.put(truncatedDate, new ArrayList<>());
