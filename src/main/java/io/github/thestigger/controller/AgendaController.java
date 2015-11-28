@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -18,7 +19,7 @@ import java.util.*;
  */
 @ManagedBean
 @ViewScoped
-public class AgendaController {
+public class AgendaController implements Serializable {
 
     @ManagedProperty("#{eventService}")
     private EventService service;

@@ -6,12 +6,13 @@ import org.primefaces.model.menu.MenuModel;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
 
 /**
  * PrimeFaces Menu Controller.
  */
 @ManagedBean
-public class MenuController {
+public class MenuController implements Serializable {
 
     private MenuModel model;
 
@@ -23,6 +24,11 @@ public class MenuController {
         DefaultMenuItem item = new DefaultMenuItem("Home");
         item.setUrl("/");
         item.setIcon("ui-icon-home");
+        model.addElement(item);
+
+        item = new DefaultMenuItem("Calendar");
+        item.setUrl("/calendar.xhtml");
+        item.setIcon("ui-icon-calculator");
         model.addElement(item);
 
         item = new DefaultMenuItem("Agenda");

@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
-public class ContactListController {
+public class ContactListController implements Serializable {
 
     @ManagedProperty("#{contactService}")
     private ContactService contactService;

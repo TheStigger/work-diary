@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
-public class EventListController {
+public class EventListController implements Serializable {
 
     @ManagedProperty("#{eventService}")
     private EventService service;
