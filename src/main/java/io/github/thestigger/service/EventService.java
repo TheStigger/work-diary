@@ -5,6 +5,10 @@ import io.github.thestigger.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +26,21 @@ public class EventService {
     }
 
     public void save(Event e) {
+        /*If event lasts all day, then set startDay hours to 0,
+        and set endDay to the next day with hours set to 0*/
+        if (e.isAllDay()) {
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            try {
+                Calendar date = Calendar.getInstance();
+                date.setTime(dateFormat.parse(dateFormat.format(e.getStartDate())));
+                e.setStartDate(date.getTime());
+
+                date.add(Calendar.DATE, 1);
+                e.setEndDate(date.getTime());
+            } catch (ParseException e1) {
+                e1.printStackTrace();
+            }
+        }
         repository.save(e);
     }
 
