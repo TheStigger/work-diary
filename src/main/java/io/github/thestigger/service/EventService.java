@@ -5,6 +5,7 @@ import io.github.thestigger.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,5 +31,9 @@ public class EventService {
 
     public void getById(String id) {
         repository.findOne(id);
+    }
+
+    public List<Event> findByDatetimeBetween(Date startDate, Date endDate) {
+        return repository.findByDatetimeBetween(startDate, endDate);
     }
 }

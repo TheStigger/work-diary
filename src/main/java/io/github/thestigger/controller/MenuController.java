@@ -25,6 +25,11 @@ public class MenuController {
         item.setIcon("ui-icon-home");
         model.addElement(item);
 
+        item = new DefaultMenuItem("Agenda");
+        item.setUrl("/agenda.xhtml");
+        item.setIcon("ui-icon-script");
+        model.addElement(item);
+
         item = new DefaultMenuItem("Events");
         item.setUrl("/events.xhtml");
         item.setIcon("ui-icon-calendar");
