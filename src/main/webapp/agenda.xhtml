@@ -28,11 +28,13 @@
                                var="event">
                         <h:panelGrid columns="6" cellpadding="10">
                             <h:outputText value="#{event.startDate}">
-                                <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
+                                <f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+                                                   timeZone="GMT+2"/>
                             </h:outputText>
                             <h:outputText value="-"/>
                             <h:outputText value="#{event.endDate}">
-                                <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
+                                <f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+                                                   timeZone="GMT+2"/>
                             </h:outputText>
                             <h:outputText value="|"/>
                             <h:outputText value="#{event.title}"/>
