@@ -22,7 +22,9 @@ public class EventService {
 
 
     public List<Event> findAll() {
-        return repository.findAll();
+        List<Event> events = repository.findAll();
+        events.sort((o1, o2) -> o1.getStartDate().compareTo(o2.getStartDate()));
+        return events;
     }
 
     public void save(Event e) {
@@ -53,6 +55,8 @@ public class EventService {
     }
 
     public List<Event> findByStartDateBetween(Date startDate, Date endDate) {
-        return repository.findByStartDateBetween(startDate, endDate);
+        List<Event> events = repository.findByStartDateBetween(startDate, endDate);
+        events.sort((o1, o2) -> o1.getStartDate().compareTo(o2.getStartDate()));
+        return events;
     }
 }
