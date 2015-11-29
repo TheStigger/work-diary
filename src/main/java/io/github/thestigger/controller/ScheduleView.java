@@ -108,6 +108,12 @@ public class ScheduleView implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    public void remove(ActionEvent actionEvent) {
+        eventModel.deleteEvent(event);
+        service.delete(event);
+        event = new Event();
+    }
+
     public EventService getService() {
         return service;
     }

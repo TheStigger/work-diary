@@ -42,7 +42,7 @@
             </h:panelGrid>
 
             <p:dialog widgetVar="eventDialog" header="Event Details"
-                      showEffect="clip" hideEffect="clip">
+                      closeOnEscape="true">
                 <h:panelGrid id="eventDetails" columns="2">
 
                     <p:outputLabel for="title" value="Titles:"/>
@@ -66,6 +66,11 @@
                     <h:selectBooleanCheckbox id="allDay"
                                              value="#{scheduleView.event.allDay}"/>
 
+                </h:panelGrid>
+                <h:panelGrid columns="3">
+                    <p:commandButton value="Delete"
+                                     actionListener="#{scheduleView.remove}"
+                                     oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
                     <p:commandButton type="reset" value="Reset"/>
                     <p:commandButton id="addButton" value="Save"
                                      actionListener="#{scheduleView.addEvent}"

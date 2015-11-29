@@ -66,23 +66,29 @@
             <h:form id="contactForm">
                 <p:messages/>
                 <p:focus/>
-                <p:panelGrid columns="1">
-                    name:
-                    <p:inputText value="#{contactListController.contact.name}"/>
-                    surname:
-                    <p:inputText
-                            value="#{contactListController.contact.surname}"/>
-                    phone number:
-                    <p:inputText
-                            value="#{contactListController.contact.phoneNumber}"/>
-                    email:
-                    <p:inputText
-                            value="#{contactListController.contact.email}"/>
+                <p:panelGrid columns="2">
+                    <p:outputLabel for="name" value="Name:"/>
+                    <p:inputText id="name"
+                                 value="#{contactListController.contact.name}"/>
+
+                    <p:outputLabel for="surname" value="Surname:"/>
+                    <p:inputText id="surname"
+                                 value="#{contactListController.contact.surname}"/>
+
+                    <p:outputLabel for="phone" value="Phone number:"/>
+                    <p:inputText id="phone"
+                                 value="#{contactListController.contact.phoneNumber}"/>
+
+                    <p:outputLabel for="email" value="Email:"/>
+                    <p:inputText id="email"
+                                 value="#{contactListController.contact.email}"/>
+
+                    <p:commandButton type="reset" value="Reset"/>
+                    <p:commandButton value="save"
+                                     action="#{contactListController.save}"
+                                     update="contactForm, :contactTable, :messages"
+                                     oncomplete="handleDialogSubmit(args, 'contactDialog')"/>
                 </p:panelGrid>
-                <p:commandButton value="save"
-                                 action="#{contactListController.save}"
-                                 update="contactForm, :contactTable, :messages"
-                                 oncomplete="handleDialogSubmit(args, 'contactDialog')"/>
             </h:form>
         </p:dialog>
 
