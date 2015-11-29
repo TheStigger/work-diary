@@ -5,3 +5,7 @@ h1 {
 .noBorders {
     border: none !important;
 }
+
+.value {
+    width: 1000px;
+}
