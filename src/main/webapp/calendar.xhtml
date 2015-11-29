@@ -23,7 +23,7 @@
 
             <h:panelGrid columnClasses="value">
                 <p:schedule id="schedule" value="#{scheduleView.eventModel}"
-                            widgetVar="myschedule" timeZone="GMT+2">
+                            widgetVar="myschedule" timeZone="GMT+2" locale="ua">
                     <p:ajax event="dateSelect"
                             listener="#{scheduleView.onDateSelect}"
                             update="eventDetails"
@@ -78,6 +78,11 @@
                 width: 1000px;
             }
         </style>
+        <script type="text/javascript">
+            PrimeFaces.locales['ua'] = {
+                firstDay: 1
+            };
+        </script>
     </ui:define>
 </ui:composition>
 
