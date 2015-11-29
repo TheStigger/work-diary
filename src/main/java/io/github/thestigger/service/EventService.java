@@ -28,8 +28,8 @@ public class EventService {
     }
 
     public void save(Event e) {
-        /*If event lasts all day, then set startDay hours to 0,
-        and set endDay to the next day with hours set to 0*/
+        /*If event lasts all day, then set starting day hours to 0,
+        and set ending day to the next day with hours set to 0*/
         if (e.isAllDay()) {
             DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
             try {
@@ -42,6 +42,14 @@ public class EventService {
             } catch (ParseException e1) {
                 e1.printStackTrace();
             }
+        }
+
+        /*If endDate less than startDate, then set endDate equals to startDate*/
+        if (e.getEndDate().compareTo(e.getStartDate()) < 0) {
+            Calendar date = Calendar.getInstance();
+            date.setTime(e.getStartDate());
+            date.add(Calendar.MINUTE, 15);
+            e.setEndDate(date.getTime());
         }
         repository.save(e);
     }
