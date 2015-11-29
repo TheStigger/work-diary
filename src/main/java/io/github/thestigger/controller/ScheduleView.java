@@ -101,6 +101,7 @@ public class ScheduleView implements Serializable {
 
         addMessage(message);
         System.out.println("event resize");
+        service.save((Event) event.getScheduleEvent());
     }
 
     private void addMessage(FacesMessage message) {
