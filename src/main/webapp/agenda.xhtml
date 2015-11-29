@@ -27,13 +27,12 @@
                     <ui:repeat value="#{agendaController.eventsMap.get(date)}"
                                var="event">
                         <h:panelGrid columns="6" cellpadding="10">
-                            <!--TODO: checkk 'all day' case-->
                             <h:outputText value="#{event.startDate}">
-                                <f:convertDateTime pattern="dd.MM.yyyy"/>
+                                <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
                             </h:outputText>
                             <h:outputText value="-"/>
                             <h:outputText value="#{event.endDate}">
-                                <f:convertDateTime pattern="dd.MM.yyyy"/>
+                                <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
                             </h:outputText>
                             <h:outputText value="|"/>
                             <h:outputText value="#{event.title}"/>
