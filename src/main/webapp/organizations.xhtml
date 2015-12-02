@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="base.xhtml">
+    <ui:define name="title">
+        <h:outputText value="Organizations"/>
+    </ui:define>
+    <ui:define name="header">
+        <h1>Contacts</h1>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:growl id="messages"/>
+
+        <p:dataTable value="#{organizationListController.organizations}"
+                     var="organization"
+                     id="organizationTable">
+            <p:column headerText="name">
+                <p:outputLabel
+                        value="#{organization.name}"/>
+            </p:column>
+            <p:column headerText="description">
+                <p:outputLabel value="#{organization.description}"/>
+            </p:column>
+            <p:column headerText="director">
+                <p:outputLabel value="#{organization.name}"/>
+            </p:column>
+            <p:column style="width:42px; text-align: center">
+                <h:form>
+                    <p:commandButton icon="ui-icon-pencil"
+                                     action="#{organizationListController.setOrganization(organization)}"
+                                     update="organizationForm"
+                                     resetValues="true"
+                                     oncomplete="PF('organizationDialog').show()"/>
+                </h:form>
+            </p:column>
+            <p:column style="width:42px; text-align: center">
+                <h:form>
+                    <p:commandButton icon="ui-icon-trash"
+                                     action="#{organizationListController.remove(organization)}"
+                                     update="organizationTable, :messages">
+                        <p:confirm header="Confirmation" message="Are you sure?"
+                                   icon="ui-icon-alert"/>
+                    </p:commandButton>
+                </h:form>
+            </p:column>
+        </p:dataTable>
+
+        <br/>
+        <h:form>
+            <p:commandButton value="Add Organization"
+                             action="#{organizationListController.clear()}"
+                             update=":organizationForm"
+                             oncomplete="PF('organizationDialog').show()"
+                             resetValues="true"/>
+        </h:form>
+
+        <p:dialog widgetVar="organizationDialog" closeOnEscape="true"
+                  modal="true"
+                  header="organization" appendTo="@(body)">
+            <h:form id="organizationForm">
+                <p:messages/>
+                <p:focus/>
+                <p:panelGrid columns="2">
+                    <p:outputLabel for="name" value="Name:"/>
+                    <p:inputText id="name"
+                                 value="#{organizationListController.organization.name}"/>
+
+                    <p:outputLabel for="surname" value="Description:"/>
+                    <p:inputText id="surname"
+                                 value="#{organizationListController.organization.description}"/>
+
+                    <p:outputLabel for="phone" value="Director:"/>
+                    <p:inputText id="phone"
+                                 value="#{organizationListController.organization.description}"/>
+
+                    <p:commandButton type="reset" value="Reset"/>
+                    <p:commandButton value="save"
+                                     action="#{organizationListController.save}"
+                                     update="organizationForm, :organizationTable, :messages"
+                                     oncomplete="handleDialogSubmit(args, 'organizationDialog')"/>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <h:form>
+            <p:confirmDialog global="true" closeOnEscape="true">
+                <p:commandButton value="Yes" type="button"
+                                 styleClass="ui-confirmdialog-yes"
+                                 icon="ui-icon-check"/>
+                <p:commandButton value="No" type="button"
+                                 styleClass="ui-confirmdialog-no"
+                                 icon="ui-icon-close"/>
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+</html>
