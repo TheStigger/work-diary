@@ -38,6 +38,7 @@
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.0.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:5.3" level="project" />
+    <orderEntry type="library" name="Maven: org.primefaces.themes:all-themes:1.0.10" level="project" />
     <orderEntry type="library" name="Maven: com.sun.faces:jsf-api:2.2.12" level="project" />
     <orderEntry type="library" name="Maven: com.sun.faces:jsf-impl:2.2.12" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.2.2.RELEASE" level="project" />
@@ -61,5 +62,12 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.6.4" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Maven: com.lowagie:itext:2.1.7" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcmail-jdk14:138" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcprov-jdk14:138" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bctsp-jdk14:1.38" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk14:1.38" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcmail-jdk14:1.38" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.7" level="project" />
   </component>
 </module>

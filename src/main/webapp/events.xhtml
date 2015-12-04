@@ -6,7 +6,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="base.xhtml">
     <ui:define name="title">
@@ -20,10 +21,14 @@
         <p:growl id="messages"/>
 
         <p:dataTable value="#{eventListController.events}" var="event"
-                     id="eventTable">
-            <p:column headerText="title">
-                <p:outputLabel
-                        value="#{event.title}"/>
+                     id="eventTable"
+                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                     paginator="true" rows="30">
+            <p:column>
+                <f:facet name="title">
+                    <h:outputText value="title"/>
+                </f:facet>
+                <h:outputText value="#{event.title}"/>
             </p:column>
             <p:column headerText="start date">
                 <h:form>

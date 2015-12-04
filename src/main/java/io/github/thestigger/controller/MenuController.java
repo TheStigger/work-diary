@@ -50,6 +50,11 @@ public class MenuController implements Serializable {
         item.setUrl("/organizations.xhtml");
         item.setIcon("ui-icon-suitcase");
         model.addElement(item);
+
+        item = new DefaultMenuItem("Export");
+        item.setUrl("/export.xhtml");
+        item.setIcon("ui-icon-disk");
+        model.addElement(item);
     }
 
     public MenuModel getModel() {

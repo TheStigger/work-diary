@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by maxim on 11/23/15.
+ * Service for Event entity.
  */
 @Service
 public class EventService {
@@ -66,5 +66,13 @@ public class EventService {
         List<Event> events = repository.findByStartDateBetween(startDate, endDate);
         events.sort((o1, o2) -> o1.getStartDate().compareTo(o2.getStartDate()));
         return events;
+    }
+
+    public List<Event> findByStartDateGreaterThan(Date date) {
+        return repository.findByStartDateGreaterThan(date);
+    }
+
+    public List<Event> findByStartDateLessThan(Date date) {
+        return repository.findByStartDateLessThan(date);
     }
 }

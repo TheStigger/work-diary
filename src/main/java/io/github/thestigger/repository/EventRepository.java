@@ -15,4 +15,8 @@ public interface EventRepository extends MongoRepository<Event, String> {
 
     // TODO: rewrite to use correct query
     List<Event> findByStartDateBetween(Date startDate, Date endDate);
+
+    List<Event> findByStartDateGreaterThan(Date date);
+
+    List<Event> findByStartDateLessThan(Date date);
 }
