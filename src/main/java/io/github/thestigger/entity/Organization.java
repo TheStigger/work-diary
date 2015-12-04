@@ -1,7 +1,6 @@
 package io.github.thestigger.entity;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Size;
@@ -20,9 +19,6 @@ public class Organization implements Serializable {
     private String name;
 
     private String description;
-
-    @DBRef
-    private Contact director;
 
     public Organization() {
     }
@@ -54,13 +50,5 @@ public class Organization implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Contact getDirector() {
-        return director;
-    }
-
-    public void setDirector(Contact director) {
-        this.director = director;
     }
 }

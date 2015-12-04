@@ -1,12 +1,13 @@
 package io.github.thestigger.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Size;
 
 /**
- * Created by maxim on 10/14/15.
+ * Contact entity.
  */
 @Document(collection = "Contacts")
 public class Contact {
@@ -23,7 +24,10 @@ public class Contact {
     private String phoneNumber;
     private String email;
     private String organizationId;
-    private String groupId;
+    private boolean director;
+
+    @DBRef
+    private Organization company;
 
     public Contact() {
     }
@@ -84,12 +88,12 @@ public class Contact {
         this.organizationId = organizationId;
     }
 
-    public String getGroupId() {
-        return groupId;
+    public boolean isDirector() {
+        return director;
     }
 
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    public void setDirector(boolean director) {
+        this.director = director;
     }
 
     @Override
@@ -110,5 +114,13 @@ public class Contact {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Organization getCompany() {
+        return company;
+    }
+
+    public void setCompany(Organization company) {
+        this.company = company;
     }
 }

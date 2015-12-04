@@ -29,9 +29,14 @@
             <p:column headerText="description">
                 <p:outputLabel value="#{organization.description}"/>
             </p:column>
-            <p:column headerText="director">
-                <p:outputLabel
-                        value="#{organization.director.name.concat(' ').concat(organization.director.surname)}"/>
+            <p:column headerText="directors">
+                <ui:repeat
+                        value="#{contactService.findDirectorsByCompany(organization)}"
+                        var="contact">
+                    <h:outputText
+                            value="#{contact.name.concat(' ').concat(contact.surname)}"/>
+                    <br/>
+                </ui:repeat>
             </p:column>
             <p:column style="width:42px; text-align: center">
                 <h:form>
@@ -80,14 +85,20 @@
 
                     <p:outputLabel for="group" value="Director:"/>
                     <p:autoComplete id="group"
-                                    value="#{organizationListController.organization.director}"
+                                    multiple="true"
+                                    value="#{organizationListController.selectedContacts}"
                                     completeMethod="#{organizationListController.completeContact}"
                                     var="contact"
                                     itemLabel="#{contact.getName().concat(' ').concat(contact.getSurname())}"
                                     itemValue="#{contact}"
                                     converter="#{contactConverter}"
                                     groupBy="#{organizationListController.getContactGroup(contact)}"
-                                    scrollHeight="250" forceSelection="true"/>
+                                    scrollHeight="250" forceSelection="true">
+                        <p:column>
+                            <h:outputText
+                                    value="#{contact.getName().concat(' ').concat(contact.getSurname())}"/>
+                        </p:column>
+                    </p:autoComplete>
 
                     <p:commandButton type="reset" value="Reset"/>
                     <p:commandButton value="save"

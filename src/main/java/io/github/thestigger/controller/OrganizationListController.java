@@ -12,8 +12,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Contact List Controller.
@@ -32,7 +32,7 @@ public class OrganizationListController implements Serializable {
 
     private List<Organization> organizations;
     private Organization organization = new Organization();
-    private Contact contact = new Contact();
+    private List<Contact> selectedContacts;
 
     @PostConstruct
     public void loadContacts() {
@@ -41,6 +41,16 @@ public class OrganizationListController implements Serializable {
 
     public void save() {
         organizationService.save(organization);
+        for (Contact contact : contactService.findDirectorsByCompany(organization)) {
+            contact.setDirector(false);
+            contact.setCompany(null);
+            contactService.save(contact);
+        }
+        for (Contact contact : selectedContacts) {
+            contact.setCompany(organization);
+            contact.setDirector(true);
+            contactService.save(contact);
+        }
         organization = new Organization();
         organizations = organizationService.findAll();
         FacesContext.getCurrentInstance().addMessage
@@ -59,16 +69,12 @@ public class OrganizationListController implements Serializable {
     }
 
     public List<Contact> completeContact(String query) {
-        List<Contact> allContacts = contactService.findAll();
-        List<Contact> filteredContacts = new ArrayList<>();
 
-        for (Contact con : allContacts) {
-            if ((con.getName() + con.getSurname()).toLowerCase().contains(query.toLowerCase())) {
-                filteredContacts.add(con);
-            }
-        }
-
-        return filteredContacts;
+        return contactService.findAll().stream()
+                .filter(con -> (con.getName() + con.getSurname())
+                        .toLowerCase()
+                        .contains(query.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     public char getContactGroup(Contact contact) {
@@ -97,6 +103,7 @@ public class OrganizationListController implements Serializable {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+        selectedContacts = contactService.findDirectorsByCompany(organization);
     }
 
     public ContactService getContactService() {
@@ -107,11 +114,11 @@ public class OrganizationListController implements Serializable {
         this.contactService = contactService;
     }
 
-    public Contact getContact() {
-        return contact;
+    public List<Contact> getSelectedContacts() {
+        return selectedContacts;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public void setSelectedContacts(List<Contact> selectedContacts) {
+        this.selectedContacts = selectedContacts;
     }
 }

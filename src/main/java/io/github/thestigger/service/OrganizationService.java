@@ -27,7 +27,7 @@ public class OrganizationService {
         repository.delete(o);
     }
 
-    public void getById(String id) {
-        repository.findOne(id);
+    public Organization getById(String id) {
+        return repository.findOne(id);
     }
 }
