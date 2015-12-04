@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by maxim on 11/22/15.
+ * Service for Contact entity.
  */
 @Service
 public class ContactService {
@@ -27,7 +27,7 @@ public class ContactService {
         repository.delete(c);
     }
 
-    public void getById(String id) {
-        repository.findOne(id);
+    public Contact getById(String id) {
+        return repository.findOne(id);
     }
 }

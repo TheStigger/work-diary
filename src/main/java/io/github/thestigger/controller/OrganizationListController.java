@@ -12,11 +12,12 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Contact List Controller.
- * <p>
+ *
  * Used for UI manipulations.
  */
 @ManagedBean
@@ -31,6 +32,7 @@ public class OrganizationListController implements Serializable {
 
     private List<Organization> organizations;
     private Organization organization = new Organization();
+    private Contact contact = new Contact();
 
     @PostConstruct
     public void loadContacts() {
@@ -38,7 +40,6 @@ public class OrganizationListController implements Serializable {
     }
 
     public void save() {
-        organization.setDirector(contactService.findAll().get(0));
         organizationService.save(organization);
         organization = new Organization();
         organizations = organizationService.findAll();
@@ -55,6 +56,23 @@ public class OrganizationListController implements Serializable {
 
     public void clear() {
         organization = new Organization();
+    }
+
+    public List<Contact> completeContact(String query) {
+        List<Contact> allContacts = contactService.findAll();
+        List<Contact> filteredContacts = new ArrayList<>();
+
+        for (Contact con : allContacts) {
+            if ((con.getName() + con.getSurname()).toLowerCase().contains(query.toLowerCase())) {
+                filteredContacts.add(con);
+            }
+        }
+
+        return filteredContacts;
+    }
+
+    public char getContactGroup(Contact contact) {
+        return contact.getSurname().charAt(0);
     }
 
     public OrganizationService getOrganizationService() {
@@ -87,5 +105,13 @@ public class OrganizationListController implements Serializable {
 
     public void setContactService(ContactService contactService) {
         this.contactService = contactService;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

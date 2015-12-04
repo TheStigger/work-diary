@@ -30,7 +30,8 @@
                 <p:outputLabel value="#{organization.description}"/>
             </p:column>
             <p:column headerText="director">
-                <p:outputLabel value="#{organization.name}"/>
+                <p:outputLabel
+                        value="#{organization.director.name.concat(' ').concat(organization.director.surname)}"/>
             </p:column>
             <p:column style="width:42px; text-align: center">
                 <h:form>
@@ -77,9 +78,16 @@
                     <p:inputText id="surname"
                                  value="#{organizationListController.organization.description}"/>
 
-                    <p:outputLabel for="phone" value="Director:"/>
-                    <p:inputText id="phone"
-                                 value="#{organizationListController.organization.description}"/>
+                    <p:outputLabel for="group" value="Director:"/>
+                    <p:autoComplete id="group"
+                                    value="#{organizationListController.organization.director}"
+                                    completeMethod="#{organizationListController.completeContact}"
+                                    var="contact"
+                                    itemLabel="#{contact.getName().concat(' ').concat(contact.getSurname())}"
+                                    itemValue="#{contact}"
+                                    converter="#{contactConverter}"
+                                    groupBy="#{organizationListController.getContactGroup(contact)}"
+                                    scrollHeight="250" forceSelection="true"/>
 
                     <p:commandButton type="reset" value="Reset"/>
                     <p:commandButton value="save"
