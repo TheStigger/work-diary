@@ -19,65 +19,137 @@
 
     <ui:define name="content">
         <p:growl id="messages"/>
+        <h:form id="tableForm">
+            <p:panelGrid columns="9">
+                <p:outputLabel for="rows" value="Rows:"/>
+                <p:inputText id="rows"
+                             value="#{eventListController.rows}"/>
+                <p:outputLabel for="start" value="Start Date:"/>
+                <p:calendar id="start"
+                            value="#{eventListController.startDate}"
+                            timeZone="GMT+2" pattern="dd.MM.yyyy HH:mm"/>
+                <p:outputLabel for="end" value="End Date:"/>
+                <p:calendar id="end"
+                            value="#{eventListController.endDate}"
+                            timeZone="GMT+2" pattern="dd.MM.yyyy HH:mm"/>
+                <p:commandButton type="reset" value="Reset"
+                                 update="eventTable, :messages"/>
+                <p:commandButton value="Add Event"
+                                 action="#{eventListController.clear()}"
+                                 update=":eventForm"
+                                 oncomplete="PF('eventDialog').show()"
+                                 resetValues="true"/>
+                <p:commandButton value="Filter"
+                                 action="#{eventListController.filter()}"
+                                 update="eventTable, eventTable1, :messages"/>
+            </p:panelGrid>
 
-        <p:dataTable value="#{eventListController.events}" var="event"
-                     id="eventTable"
-                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                     paginator="true" rows="30">
-            <p:column>
-                <f:facet name="title">
-                    <h:outputText value="title"/>
+            <p:dataTable value="#{eventListController.events}" var="event"
+                         id="eventTable1" styleClass="exportTable">
+
+                <p:column headerText="title">
+                    <h:outputText value="#{event.title}"/>
+                </p:column>
+
+                <p:column headerText="start date">
+                    <h:outputText value="#{event.startDate}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+                                           timeZone="GMT+2"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="end date">
+                    <h:outputText value="#{event.endDate}">
+                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+                                           timeZone="GMT+2"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="description">
+                    <h:outputText value="#{event.description}"/>
+                </p:column>
+            </p:dataTable>
+
+
+            <p:dataTable value="#{eventListController.events}" var="event"
+                         id="eventTable"
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                         paginator="true" rows="#{eventListController.rows}">
+                <f:facet name="{Exporters}">
+                    <h:commandLink>
+                        <p:graphicImage value="/images/xls.png" width="24"/>
+                        <p:dataExporter type="xls"
+                                        target=":tableForm:eventTable1"
+                                        fileName="cars"/>
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <p:graphicImage value="/images/pdf.png" width="24"/>
+                        <p:dataExporter type="pdf"
+                                        target=":tableForm:eventTable1"
+                                        fileName="cars"/>
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <p:graphicImage value="/images/csv.png" width="24"/>
+                        <p:dataExporter type="csv"
+                                        target=":tableForm:eventTable1"
+                                        fileName="cars"/>
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <p:graphicImage value="/images/xml.png" width="24"/>
+                        <p:dataExporter type="xml"
+                                        target=":tableForm:eventTable1"
+                                        fileName="cars"/>
+                    </h:commandLink>
                 </f:facet>
-                <h:outputText value="#{event.title}"/>
-            </p:column>
-            <p:column headerText="start date">
-                <h:form>
+
+                <p:column>
+                    <f:facet name="title">
+                        <h:outputText value="title"/>
+                    </f:facet>
+                    <h:outputText value="#{event.title}"/>
+                </p:column>
+                <p:column headerText="start date">
+                    <!--<h:form>-->
                     <p:calendar value="#{event.startDate}"
                                 showOn="button" pattern="dd.MM.yyyy  HH:mm"
                                 onfocus="$('#ui-datepicker-div').find('td').unbind();"
                                 readonly="true"/>
-                </h:form>
-            </p:column>
-            <p:column headerText="end date">
-                <h:form>
+                    <!--</h:form>-->
+                </p:column>
+                <p:column headerText="end date">
+                    <!--<h:form>-->
                     <p:calendar value="#{event.endDate}"
                                 showOn="button" pattern="dd.MM.yyyy  HH:mm"
                                 onfocus="$('#ui-datepicker-div').find('td').unbind();"
                                 readonly="true"/>
-                </h:form>
-            </p:column>
-            <p:column headerText="description">
-                <p:outputLabel
-                        value="#{event.description}"/>
-            </p:column>
-            <p:column style="width:42px; text-align: center">
-                <h:form>
+                    <!--</h:form>-->
+                </p:column>
+                <p:column headerText="description">
+                    <p:outputLabel
+                            value="#{event.description}"/>
+                </p:column>
+                <p:column style="width:42px; text-align: center">
+                    <!--<h:form>-->
                     <p:commandButton icon="ui-icon-pencil"
                                      action="#{eventListController.setEvent(event)}"
                                      update="eventForm"
                                      resetValues="true"
                                      oncomplete="PF('eventDialog').show()"/>
-                </h:form>
-            </p:column>
-            <p:column style="width:42px; text-align: center">
-                <h:form>
+                    <!--</h:form>-->
+                </p:column>
+                <p:column style="width:42px; text-align: center">
+                    <!--<h:form>-->
                     <p:commandButton icon="ui-icon-trash"
                                      action="#{eventListController.remove(event)}"
                                      update="eventTable, :messages">
                         <p:confirm header="Confirmation" message="Are you sure?"
                                    icon="ui-icon-alert"/>
                     </p:commandButton>
-                </h:form>
-            </p:column>
-        </p:dataTable>
-
-        <br/>
-        <h:form>
-            <p:commandButton value="Add Event"
-                             action="#{eventListController.clear()}"
-                             update=":eventForm"
-                             oncomplete="PF('eventDialog').show()"
-                             resetValues="true"/>
+                    <!--</h:form>-->
+                </p:column>
+            </p:dataTable>
         </h:form>
 
         <p:dialog widgetVar="eventDialog" closeOnEscape="true" modal="true"
@@ -112,7 +184,7 @@
                     <p:commandButton type="reset" value="Reset"/>
                     <p:commandButton value="save"
                                      action="#{eventListController.save}"
-                                     update="eventForm, :eventTable, :messages"
+                                     update="eventForm, :tableForm:eventTable, :tableForm:eventTable1, :messages"
                                      oncomplete="handleDialogSubmit(args, 'eventDialog')"/>
                 </p:panelGrid>
             </h:form>
