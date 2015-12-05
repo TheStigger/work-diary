@@ -2,11 +2,13 @@ package io.github.thestigger.entity;
 
 import org.primefaces.model.ScheduleEvent;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * MongoDB Event entity.
@@ -26,6 +28,9 @@ public class Event implements ScheduleEvent, Serializable {
     private Object data;
     private boolean editable = true;
     private String description;
+
+    @DBRef
+    private List<Contact> contacts;
 
     @Override
     public String getId() {
@@ -107,6 +112,14 @@ public class Event implements ScheduleEvent, Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     @Override

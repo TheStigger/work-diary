@@ -177,6 +177,23 @@
                     <p:inputText id="description"
                                  value="#{eventListController.event.description}"/>
 
+                    <p:outputLabel for="group" value="Related contacts:"/>
+                    <p:autoComplete id="group"
+                                    multiple="true"
+                                    value="#{eventListController.selectedContacts}"
+                                    completeMethod="#{eventListController.completeContact}"
+                                    var="contact"
+                                    itemLabel="#{contact.getName().concat(' ').concat(contact.getSurname())}"
+                                    itemValue="#{contact}"
+                                    converter="#{contactConverter}"
+                                    groupBy="#{eventListController.getContactGroup(contact)}"
+                                    scrollHeight="250" forceSelection="true">
+                        <p:column>
+                            <h:outputText
+                                    value="#{contact.getName().concat(' ').concat(contact.getSurname())}"/>
+                        </p:column>
+                    </p:autoComplete>
+
                     <p:outputLabel for="allDay" value="All Day:"/>
                     <h:selectBooleanCheckbox id="allDay"
                                              value="#{eventListController.event.allDay}"/>

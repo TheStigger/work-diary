@@ -1,6 +1,8 @@
 package io.github.thestigger.controller;
 
+import io.github.thestigger.entity.Contact;
 import io.github.thestigger.entity.Event;
+import io.github.thestigger.service.ContactService;
 import io.github.thestigger.service.EventService;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +14,7 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Event List Controller.
@@ -25,11 +28,15 @@ public class EventListController implements Serializable {
     @ManagedProperty("#{eventService}")
     private EventService service;
 
+    @ManagedProperty("#{contactService}")
+    private ContactService contactService;
+
     private List<Event> events;
     private Event event = new Event();
     private Date startDate;
     private Date endDate;
     private int rows = 30;
+    private List<Contact> selectedContacts;
 
     @PostConstruct
     public void init() {
@@ -41,6 +48,7 @@ public class EventListController implements Serializable {
     }
 
     public void save() {
+        event.setContacts(selectedContacts);
         service.save(event);
         event = new Event();
         events = service.findAll();
@@ -53,6 +61,16 @@ public class EventListController implements Serializable {
         events = service.findAll();
         FacesContext.getCurrentInstance().addMessage
                 (null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Event removed!", null));
+    }
+
+    public List<Contact> completeContact(String query) {
+        return contactService.findAll().stream()
+                .filter(contact -> contact.getName().toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    public char getContactGroup(Contact contact) {
+        return contact.getSurname().charAt(0);
     }
 
     public void filter() {
@@ -73,6 +91,7 @@ public class EventListController implements Serializable {
 
     public void setEvent(Event event) {
         this.event = event;
+        selectedContacts = event.getContacts();
     }
 
     public EventService getService() {
@@ -113,5 +132,21 @@ public class EventListController implements Serializable {
 
     public void setRows(int rows) {
         this.rows = rows;
+    }
+
+    public List<Contact> getSelectedContacts() {
+        return selectedContacts;
+    }
+
+    public void setSelectedContacts(List<Contact> selectedContacts) {
+        this.selectedContacts = selectedContacts;
+    }
+
+    public ContactService getContactService() {
+        return contactService;
+    }
+
+    public void setContactService(ContactService contactService) {
+        this.contactService = contactService;
     }
 }
