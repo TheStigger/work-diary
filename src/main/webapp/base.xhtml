@@ -15,6 +15,9 @@
 </h:head>
 
 <h:body>
+    <p:growl widgetVar="growl" showDetail="true"/>
+    <p:socket onMessage="handleMessage" channel="/notification"/>
+
     <p:layout fullPage="true">
         <p:layoutUnit position="north" size="110">
             <div id="header">

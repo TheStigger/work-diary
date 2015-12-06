@@ -2,6 +2,8 @@ package io.github.thestigger;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import io.github.thestigger.service.EventService;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
@@ -22,5 +24,11 @@ public class SpringMongoConfiguration extends AbstractMongoConfiguration {
     @Override
     public Mongo mongo() throws Exception {
         return new MongoClient("127.0.0.1");
+    }
+
+    @Bean
+    public EventService eventService() {
+//        EventService eventService = new EventService();
+        return new EventService();
     }
 }

@@ -14,7 +14,7 @@ import java.util.*;
 
 /**
  * Agenda Controller.
- * <p>
+ *
  * Used for UI manipulations.
  */
 @ManagedBean
@@ -36,9 +36,7 @@ public class AgendaController implements Serializable {
 
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         for (Event event : events) {
-            System.out.println(event);
-            String truncatedDate = null;
-            truncatedDate = dateFormat.format(event.getStartDate());
+            String truncatedDate = dateFormat.format(event.getStartDate());
             if (eventsMap == null) {
                 eventsMap = new LinkedHashMap<>();
             }
