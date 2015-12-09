@@ -20,14 +20,8 @@ public class MenuController implements Serializable {
     public void init() {
         model = new DefaultMenuModel();
 
-        // TODO resolve hardcoding problem
-        DefaultMenuItem item = new DefaultMenuItem("Home");
+        DefaultMenuItem item = new DefaultMenuItem("Calendar");
         item.setUrl("/");
-        item.setIcon("ui-icon-home");
-        model.addElement(item);
-
-        item = new DefaultMenuItem("Calendar");
-        item.setUrl("/calendar.xhtml");
         item.setIcon("ui-icon-calculator");
         model.addElement(item);
 
