@@ -31,10 +31,6 @@ public class ScheduledTask {
 
         List<Event> events = service.findByStartDateBetween(new Date(), calendar.getTime());
 
-
-        System.out.println(events.get(0));
-        System.out.println(new Date().getTime());
-        System.out.println(events.get(0).getStartDate().getTime());
         for (Event event : events) {
             EventBus eventBus = EventBusFactory.getDefault().eventBus();
             eventBus.publish("/notification", new FacesMessage(event.getTitle()));

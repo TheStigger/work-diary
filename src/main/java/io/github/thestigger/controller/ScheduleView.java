@@ -17,7 +17,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -49,13 +48,6 @@ public class ScheduleView implements Serializable {
         return eventModel;
     }
 
-    private Calendar today() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
-
-        return calendar;
-    }
-
     public ScheduleEvent getEvent() {
         return event;
     }
@@ -65,8 +57,6 @@ public class ScheduleView implements Serializable {
     }
 
     public void addEvent(ActionEvent actionEvent) {
-        System.out.println("add event");
-        System.out.println(event);
         if (event.getId() == null) {
             eventModel.addEvent(event);
         } else {
@@ -79,7 +69,6 @@ public class ScheduleView implements Serializable {
 
     public void onEventSelect(SelectEvent selectEvent) {
         event = (Event) selectEvent.getObject();
-        System.out.println(event);
     }
 
     public void onDateSelect(SelectEvent selectEvent) {
@@ -89,18 +78,20 @@ public class ScheduleView implements Serializable {
     }
 
     public void onEventMove(ScheduleEntryMoveEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Event moved", "Day delta:" + event.getDayDelta() +
+                ", Minute delta:" + event.getMinuteDelta());
 
         addMessage(message);
-        System.out.println("event move ");
         service.save((Event) event.getScheduleEvent());
     }
 
     public void onEventResize(ScheduleEntryResizeEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Event resized", "Day delta:" + event.getDayDelta() +
+                ", Minute delta:" + event.getMinuteDelta());
 
         addMessage(message);
-        System.out.println("event resize");
         service.save((Event) event.getScheduleEvent());
     }
 
