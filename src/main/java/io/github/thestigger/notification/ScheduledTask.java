@@ -1,15 +1,12 @@
 package io.github.thestigger.notification;
 
-import io.github.thestigger.SpringMongoConfiguration;
 import io.github.thestigger.entity.Event;
 import io.github.thestigger.service.EventService;
 import org.primefaces.push.EventBus;
 import org.primefaces.push.EventBusFactory;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import javax.faces.application.FacesMessage;
 import java.util.Calendar;
@@ -17,15 +14,18 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Job to check current state and notify about new events.
+ * Class with Scheduled tasks.
+ * <p>
+ * Used to check Events and push notifications if necessary.
  */
-public class CheckNotificationsJob implements Job {
+@Component
+public class ScheduledTask {
 
-    @Override
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringMongoConfiguration.class);
-        EventService service = applicationContext.getBean(EventService.class);
+    @Autowired
+    private EventService service;
 
+    @Scheduled(fixedDelay = 7000)
+    public void checkEvents() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, 8);
 
@@ -37,7 +37,15 @@ public class CheckNotificationsJob implements Job {
         System.out.println(events.get(0).getStartDate().getTime());
         for (Event event : events) {
             EventBus eventBus = EventBusFactory.getDefault().eventBus();
-            eventBus.publish("/notification", new FacesMessage(events.get(0).getTitle()));
+            eventBus.publish("/notification", new FacesMessage(event.getTitle()));
         }
+    }
+
+    public EventService getService() {
+        return service;
+    }
+
+    public void setService(EventService service) {
+        this.service = service;
     }
 }
