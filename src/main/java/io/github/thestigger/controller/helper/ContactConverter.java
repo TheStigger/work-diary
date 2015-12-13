@@ -21,12 +21,14 @@ public class ContactConverter implements Converter {
     private ContactService contactService;
 
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
-        System.out.println(value);
         if (value != null && value.trim().length() > 0) {
             try {
                 return contactService.getById(value);
             } catch (NumberFormatException e) {
-                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid theme."));
+                throw new ConverterException(
+                        new FacesMessage(
+                                FacesMessage.SEVERITY_ERROR,
+                                "Conversion Error", "Not a valid theme."));
             }
         } else {
             return null;

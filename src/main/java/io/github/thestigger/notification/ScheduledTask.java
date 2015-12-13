@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Class with Scheduled tasks.
- * <p>
+ *
  * Used to check Events and push notifications if necessary.
  */
 @Component

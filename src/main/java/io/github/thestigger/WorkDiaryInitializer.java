@@ -8,9 +8,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 /**
- * Created by maxim on 11/19/15.
+ * Spring Configuration Initializer.
  */
-public class MyWebAppInitializer implements WebApplicationInitializer {
+public class WorkDiaryInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         // create the root Spring application context

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 /**
  * Event List Controller.
- * <p>
+ *
  * Used for UI manipulations.
  */
 @ManagedBean

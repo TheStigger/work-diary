@@ -25,7 +25,10 @@ public class OrganizationConverter implements Converter {
             try {
                 return service.getById(value);
             } catch (NumberFormatException e) {
-                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid theme."));
+                throw new ConverterException(
+                        new FacesMessage(
+                                FacesMessage.SEVERITY_ERROR,
+                                "Conversion Error", "Not a valid theme."));
             }
         } else {
             return null;

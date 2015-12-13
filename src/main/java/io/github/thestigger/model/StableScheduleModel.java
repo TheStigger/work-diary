@@ -5,7 +5,7 @@ import org.primefaces.model.ScheduleEvent;
 
 /**
  * Schedule model with overridden addEvent() method.
- * <p>
+ *
  * This method don't override id in Event entity.
  */
 public class StableScheduleModel extends DefaultScheduleModel {
